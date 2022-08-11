@@ -8,7 +8,7 @@ const goods = {
         available: 'да',
     },
     2: {
-        id: 1,
+        id: 2,
         name: 'Плащ',
         description: 'Серый с поясом',
         sizes: [44, 46, 48, 50],
@@ -16,7 +16,7 @@ const goods = {
         available: 'да',
     },
     3: {
-        id: 1,
+        id: 3,
         name: 'Брюки',
         description: 'Классика',
         sizes: [48, 50, 52],
@@ -24,7 +24,7 @@ const goods = {
         available: 'нет',
     },
     4: {
-        id: 1,
+        id: 4,
         name: 'Ботинки',
         description: 'Синие на тонкой подошве',
         sizes: [38, 39, 40, 41, 42, 44, 46],
@@ -32,7 +32,7 @@ const goods = {
         available: 'под заказ',
     },
     5: {
-        id: 1,
+        id: 5,
         name: 'Рубашка',
         description: 'В клеточку',
         sizes: [39, 40, 42],
@@ -49,5 +49,31 @@ const basket = [
     }
 ]
 
-console.log(goods[4].sizes[basket[0].size])
-// console.log(basket[0].size)
+// console.log(goods[4].sizes[basket[0].size])
+console.log(Object.keys(goods).length)
+
+const goodsAdd = {
+        id: 15,
+        name: 'Кроссовки',
+        description: 'Для бега',
+        sizes: [40, 42, 44],
+        price: 3200,
+        available: 'да',
+    }
+
+console.log(goods)
+
+function addGood (goodsAdd) {
+    const idAdd = Object.keys(goods).length + 1;
+    goods[idAdd] = goodsAdd;
+}
+
+function deleteGood (idDelete) {
+    delete goods[idDelete];
+}
+
+// addGood(goodsAdd);
+
+// deleteGood();
+
+console.log(goods)
