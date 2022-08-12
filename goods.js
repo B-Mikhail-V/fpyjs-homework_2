@@ -24,7 +24,7 @@ const goods = {
         available: 'нет',
     },
     4: {
-        id: 4,
+        id: 6,
         name: 'Ботинки',
         description: 'Синие на тонкой подошве',
         sizes: [38, 39, 40, 41, 42, 44, 46],
@@ -32,7 +32,7 @@ const goods = {
         available: 'под заказ',
     },
     5: {
-        id: 5,
+        id: 8,
         name: 'Рубашка',
         description: 'В клеточку',
         sizes: [39, 40, 42],
@@ -44,13 +44,14 @@ const goods = {
 const basket = [
     {
         good: 1,
-        size: 2,
+        size: 58,
         qty: 2,  
     }
 ]
+// const basket = []
 
 // console.log(goods[4].sizes[basket[0].size])
-console.log(Object.keys(goods).length)
+// console.log(Object.keys(goods).length)
 
 const goodsAdd = {
         id: 15,
@@ -61,19 +62,70 @@ const goodsAdd = {
         available: 'да',
     }
 
-console.log(goods)
+// console.log(basket)
 
-function addGood (goodsAdd) {
-    const idAdd = Object.keys(goods).length + 1;
-    goods[idAdd] = goodsAdd;
-}
+// function addGood (goodsAdd) {
+//     const idAdd = Object.keys(goods).length + 1;
+//     goods[idAdd] = goodsAdd;
+// }
 
-function deleteGood (idDelete) {
-    delete goods[idDelete];
-}
+// function deleteGood (idDelete) {
+//     delete goods[idDelete];
+// }
 
 // addGood(goodsAdd);
 
 // deleteGood();
 
-console.log(goods)
+function addGoodBasket(goodId, goodSizeId, goodQty) {
+    
+}
+console.log(basket)  
+
+// goodId = 3
+// goodSizeId = 52
+// goodQty = 2
+// basket.length = 0;
+console.log(basket) 
+
+function createBasketData(goodId, goodSizeId, goodQty) {
+    
+    for (let i = 1; i <= Object.keys(goods).length; i++) {
+        if (goods[i].id == goodId) {
+            // console.log(goods[i].sizes[goodSizeId])
+            basketData = {good: goodId, size: goodSizeId, qty: goodQty}
+            // basket.push(basketData)
+            // console.log(basket)   
+        } else {
+            return;
+            
+        }
+    }
+
+    for (let i = 0; i < Object.keys(basket).length; i++) {
+        // console.log(basket[i])
+        if (basket[i].id == basketData.good || basket[i].size == basketData.size) {
+            // console.log("OK")
+            basket[i].qty += goodQty;
+            break;
+        } else {
+            basket.push(basketData);
+            break;
+    
+        }
+    }
+
+}
+        
+
+
+
+
+
+
+createBasketData(1, 58, 2)
+// basket.length = 0;
+// basket.push({good: 1, size: 22, qty: 1})
+console.log(basket)  
+
+// console.log(basket)
