@@ -52,7 +52,14 @@ const basket = [
         size: 50,
         qty: 1,  
     },
+    {
+        good: 4,
+        size: 42,
+        qty: 3,  
+    },
 ]
+
+
 // создание массива ссылок 
 goodsIndex = []
 for (let i = 1; i <= Object.keys(goods).length; i++) {
@@ -64,9 +71,7 @@ function isAlreadyInBasket(goodId, goodSize) {
     for (let i = 0; i < Object.keys(basket).length; i++) {
         if (basket[i].good == goodId && basket[i].size == goodSize) {
             return i;
-        } /*else {
-            return false;
-        }*/
+        } 
     }
 }
         
@@ -76,14 +81,12 @@ function isGoodAvailable(goodId, goodSize) {
     for (let i = 0; i < Object.keys(goodsIndex).length; i++) {
         if (goodsIndex[i].id == goodId && goodsIndex[i].sizes.includes(goodSize) && goodsIndex[i].available == 'да') {
             return true;
-        } /*else {
-            return false;
-        }*/
+        } 
     }
 }
     
         
-// добавление товара в корзину; на входе id, размер и количество товара. 
+// добавление товара в корзину; на вход подается id, размер и количество товара. 
 function addGoodBasket(goodId, goodSize, goodQty) {
     if (isAlreadyInBasket(goodId, goodSize) !== undefined && isGoodAvailable(goodId, goodSize)) {
         basket[isAlreadyInBasket(goodId, goodSize)].qty += goodQty
@@ -100,11 +103,51 @@ function addGoodBasket(goodId, goodSize, goodQty) {
 
 }
 
+// удаление товара из корзины; на вход подается id и размер товара;
+function removeGoodBasket(goodId, goodSize) {
+   if (isAlreadyInBasket(goodId, goodSize) !== undefined) {
+    basket.splice(isAlreadyInBasket(goodId, goodSize), 1)
+    console.log ("Товар: Наименование-", goods[goodId].name, "размер-", goodSize, "удален из корзины")
+   } else if (isAlreadyInBasket(goodId, goodSize) == undefined) {
+    console.log ("Указанного товара, id=", goodId, "размер-", goodSize, "в корзине нет, состав корзины не изменился")
+   }
+}
+ 
+// очистка корзины
+function clearBasket(array) {
+    array.length = 0;
+    console.log ("Корзина полностью очищена")
+}
 
-        
+console.log("Исходное состояние корзины:", basket, "\n") 
+
 addGoodBasket(2, 44, 3)
+addGoodBasket(1, 58, 3)
+addGoodBasket(1, 58, 1)
+addGoodBasket(5, 50, 1)
+
+console.log("Состояние корзины после добавление товаров:", basket, "\n") 
+
+removeGoodBasket(2, 40)
+removeGoodBasket(1, 58)
+console.log("Состояние корзины после удаления товаров:", basket, "\n") 
 
 
+function calcTotalBasket(array) {
+    calcTotalBasket.totalList = {};
+    calcTotalBasket.totalAmount = 0;
+    calcTotalBasket.totalSumm = 0;
+        for (let i = 0; i < Object.keys(basket).length; i++) {
+            calcTotalBasket.totalAmount += basket[i].qty;
+            calcTotalBasket.totalSumm += basket[i].qty * goods[basket[0].good].price;
+        }
+    calcTotalBasket.totalList = {
+        totalAmount: calcTotalBasket.totalAmount,
+        totalSumm: calcTotalBasket.totalSumm,
+    }
+    return calcTotalBasket.totalList
+    
+}
 
 
-console.log(basket)  
+console.log("Итоговая информация о корзине", calcTotalBasket(basket), "\n")
