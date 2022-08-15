@@ -1,3 +1,4 @@
+// объект со списком товаров
 const goods = {    
     1: {
         id: 1,
@@ -41,6 +42,7 @@ const goods = {
     }
 }
 
+// массив товаров в корзине
 const basket = [
     {
         good: 1,
@@ -60,13 +62,13 @@ const basket = [
 ]
 
 
-// создание массива ссылок 
+// создание массива ссылок на товары goodsIndex
 goodsIndex = []
 for (let i = 1; i <= Object.keys(goods).length; i++) {
     goodsIndex.push(goods[i])
 }
 
-// проверка, есть ли указанный товар в корзине
+// проверка, есть ли указанный товар в корзине; на вход подается id, размер товара
 function isAlreadyInBasket(goodId, goodSize) {
     for (let i = 0; i < Object.keys(basket).length; i++) {
         if (basket[i].good == goodId && basket[i].size == goodSize) {
@@ -76,7 +78,7 @@ function isAlreadyInBasket(goodId, goodSize) {
 }
         
 
-// проверка, доступен ли товар для добавления в корзину
+// проверка, доступен ли товар для добавления в корзину; ; на вход подается id, размер товара
 function isGoodAvailable(goodId, goodSize) {
     for (let i = 0; i < Object.keys(goodsIndex).length; i++) {
         if (goodsIndex[i].id == goodId && goodsIndex[i].sizes.includes(goodSize) && goodsIndex[i].available == 'да') {
@@ -119,20 +121,7 @@ function clearBasket(array) {
     console.log ("Корзина полностью очищена")
 }
 
-console.log("Исходное состояние корзины:", basket, "\n") 
-
-addGoodBasket(2, 44, 3)
-addGoodBasket(1, 58, 3)
-addGoodBasket(1, 58, 1)
-addGoodBasket(5, 50, 1)
-
-console.log("Состояние корзины после добавление товаров:", basket, "\n") 
-
-removeGoodBasket(2, 40)
-removeGoodBasket(1, 58)
-console.log("Состояние корзины после удаления товаров:", basket, "\n") 
-
-
+// подсчет итоговых параметров
 function calcTotalBasket(array) {
     calcTotalBasket.totalList = {};
     calcTotalBasket.totalAmount = 0;
@@ -150,4 +139,24 @@ function calcTotalBasket(array) {
 }
 
 
+// все, что ниже - это запуск функций, проверки
+console.log("Исходное состояние корзины:", basket, "\n") 
+
+// запускае добавление с различными папаметрами
+addGoodBasket(2, 44, 3)
+addGoodBasket(1, 58, 3)
+addGoodBasket(1, 58, 1)
+addGoodBasket(5, 50, 1)
+
+console.log("Состояние корзины после добавление товаров:", basket, "\n") 
+
+// запускае удаление с различными папаметрами
+removeGoodBasket(2, 40)
+removeGoodBasket(1, 58)
+console.log("Состояние корзины после удаления товаров:", basket, "\n") 
+
+// очищаем корзину
+// clearBasket(basket)
+
+// запускаем функцию создания объекта с итоговыми параметрами
 console.log("Итоговая информация о корзине", calcTotalBasket(basket), "\n")
